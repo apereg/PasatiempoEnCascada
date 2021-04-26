@@ -1,5 +1,5 @@
 body {
-    margin: 0px;
+    margin: 0;
 }
 
 .gameTitle{
@@ -8,6 +8,7 @@ body {
     text-align: center;
     margin-left: auto;
     margin-right: auto;
+    background: aquamarine;
 }
 
 .searchBar{
@@ -16,6 +17,7 @@ body {
     margin-left: auto;
     margin-right: auto;
     color: white;
+    background: white;
 }
 
 .board{
@@ -23,6 +25,9 @@ body {
     text-align: center;
     margin-left: auto;
     margin-right: auto;
+    background: green;
+    float: left;
+    width: 40%;
 }
 
 .box {
@@ -33,16 +38,18 @@ body {
     color: black;
     width: 30px;
     height: 30px;
+
 }
 
 .boxCorrect{
-    background-color: lawngreen;
+    background-color: #FFFFFF;
     border-color: gray;
     text-align: center;
     text-transform: uppercase;
     color: black;
     width: 30px;
     height: 30px;
+    background-color: #333333;
 }
 
 .boxWrong{
@@ -53,12 +60,29 @@ body {
     color: black;
     width: 30px;
     height: 30px;
+
+}
+.help{
+    color: white;
+    width: 50%;
+    float: right;
+    background-color: #333333;
 }
 
 .clues{
     color: white;
+    float: right;
+    width: 40%;
+    background-color: #444444;
 }
 
-.help{
-    color: white;
+.bottomButtons{
+
+    width: 100%;
 }
+
+.button{
+    background-color: #555555;
+}
+
+
