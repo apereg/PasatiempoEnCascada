@@ -1,4 +1,4 @@
-const dictionary = []
+let dictionary = []
 
 function launch() {
     loadDictionary()
@@ -131,4 +131,52 @@ function checkChange(word1, word2) {
         if (word1[i] === word2[i])
             coincidences++
     return coincidences === word1.length - 1;
+}
+
+function searchClues(){
+    /* Se obtienen las pistas restantes para si son 0 no seguir con la operacion. */
+    let cluesLeft = document.getElementById('cluesLeft').innerHTML.substring(19);
+    if(parseInt(cluesLeft) == 0) {
+        alert("¡No te quedan más pistas!")
+        return;
+    }
+
+    /* Se mapea las palabras de busqueda en un array ordenado alfabeticamente. */
+    const aux = document.getElementById('cluesSearchBar').getElementsByTagName('input')[0].value.toUpperCase()
+    let letters = []
+    for (let i = 0; i < aux.length; i++)
+        letters.push(aux[i])
+
+    if(letters.length == 0){
+        alert("¡El campo de las letras esta vacio!")
+        return
+    }
+    letters = letters.sort()
+
+    /* Se buscan las palabras del diccionario obteniendo las validas. */
+    const validWords = []
+    for (let i = 0; i < dictionary.length; i++) {
+        let valid = true
+        let posToSearch = 0
+        let j = 0
+        while (j < letters.length && valid !== false) {
+            /* Si ya una de las letras no esta se salta a la siguiente palabra. */
+            if(dictionary[i].indexOf(letters[j], posToSearch) !== -1){
+                /* Si la siguiente letra a buscar es la misma se actualiza la posicion de inicio. */
+                if(letters.length > j+1 && letters[j+1] === letters[j])
+                    posToSearch = dictionary[i].indexOf(letters[j], posToSearch) + 1
+                else
+                    posToSearch = 0
+            } else {
+                valid = false
+            }
+            j++
+        }
+        if(valid)
+            validWords.push(dictionary[i])
+    }
+
+    /* Se muestran las palabras y se actualizan las pistas. */
+    document.getElementById('cluesResult').innerText = validWords.toString()
+    document.getElementById('cluesLeft').innerHTML = document.getElementById('cluesLeft').innerHTML.replace(cluesLeft, (parseInt(cluesLeft)-1).toString())
 }

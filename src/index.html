@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" crossorigin="anonymous">
+<html lang="es" crossorigin="anonymous" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Pasatiempo En Cascada</title>
@@ -18,20 +18,15 @@
     <div class="normalSeparator"></div>
     <div id="mainContainer">
         <div id="ad1">
-            a
+            <a href="https://github.com/apereg"> <img src="./../resources/ad1.jpg" width="185"></a>
         </div>
         <div id="gameContainer">
             <div id="boardContainer">
-                <div class="normalSeparator"></div>
-                <div id="boardTitleContainer">
-                    <div id="boardTitle">
-                        Tablero
-                    </div>
-                    <div id="cluesButton">
-                        B
-                    </div>
+                <div class="separator"></div>
+                <div id="boardTitle">
+                    Tablero
                 </div>
-                <div class="normalSeparator"></div>
+                <div class="separator"></div>
                 <div id="board">
                     <table id="tableFour"></table>
                     <table id="tableSix"></table>
@@ -65,30 +60,37 @@
                     </div>
                     <div class="separator"></div>
                     <div class="definitionsTitle">
-                        <text id="cluesLeft"> Pistas restantes: 3</text>
+                        <text id='cluesLeft'> Pistas restantes: 3</text>
                     </div>
+                    <div class='separator'></div>
+                    <div id='cluesSearchContainer'>
+                        <div id='cluesSearchBar'>
+                            <input type='text' width='100%' id='cluesSearcherInput'>
+                        </div>
+                        <div id="cluesSearchButton">
+                            <input type="button" id='cluesSearcherButton' onClick='searchClues()'></input>
+                        </div>
+                    </div>
+                    <div class="normalSeparator"></div>
+                    <div id="cluesResult">
+                        <textarea readonly rows="6" cols="75" id="clues"></textarea>
+                    </div>
+                    <div class="separator"></div>
                 </div>
             </div>
 
         </div>
         <div id="ad2">
-            c
+            <a href="https://github.com/apereg"> <img src="./../resources/ad2.jpg" width="185"></a>
         </div>
     </div>
     <div id="bottomContainer">
-        <div class="button">
-            Limpiar almacenamiento
-        </div>
-        <div class="button">
-            Limpiar pasatiempos
-        </div>
-        <div class="button">
-            Guardar en memoria
-        </div>
-        <div class="button">
-            Cargar de memoria
-        </div>
+        <input type="text" readonly class="button" value="a"></input>
+        <input type="text" readonly class="button" value="b"></input>
+        <input type="text" readonly class="button" value="c"></input>
+        <input type="text" readonly class="button" value="d"></input>
     </div>
+
 </div>
 </body>
 </html>

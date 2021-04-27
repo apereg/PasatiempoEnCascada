@@ -5,6 +5,7 @@ html {
 
 body {
     background: linear-gradient(to top right, rgb(78, 90, 217), rgb(95, 89, 200), rgb(112, 87, 183), rgb(129, 86, 165), rgb(146, 84, 148), rgb(163, 83, 131), rgba(141, 102, 132, 1), rgba(119, 121, 133, 1), rgba(98, 140, 135, 1), rgba(76, 158, 136, 0.99), rgba(54, 177, 137, 0.99), rgba(32, 196, 138, 0.99));
+    display: inline-block;
 }
 
 div.separator {
@@ -46,8 +47,19 @@ div.bigSeparator {
 
 #ad1 {
     float: left;
-    border: 2px solid #ccc;
-    height: 700px;
+    border: 2px solid black;
+    height: 385px;
+    margin-top: 150px;
+    margin-left: 50px;
+    width: 10%;
+}
+
+#ad2 {
+    float: left;
+    border: 2px solid black;
+    height: 385px;
+    margin-top: 150px;
+    margin-right: 50px;
     width: 10%;
 }
 
@@ -59,28 +71,8 @@ div.bigSeparator {
     justify-content: space-around;
 }
 
-#ad2 {
-    float: left;
-    border: 2px solid #ccc;
-    height: 700px;
-    width: 10%;
-}
-
-#bottomContainer {
-    height: 100px;
-    display: flex;
-    justify-content: space-around;
-    margin-left: 190px;
-    margin-right: 190px;
-}
-
-#boardTitleContainer {
-    display: flex;
-    justify-content: space-around;
-}
-
 #boardContainer {
-    margin-left: 50px;
+    margin-left: 35px;
     height: 695px;
     width: 35%;
     border: 4px solid white;
@@ -89,22 +81,17 @@ div.bigSeparator {
 
 #boardTitle {
     text-align: left;
-    width: 35%;
-    margin-left: 45px;
-    height: 100%;
+    height: 50px;
     font: 36px Verdana, Geneva, sans-serif;
-    color: skyblue;
-}
-
-#cluesButton {
-    width: 9%;
-    border: 1px solid red;
+    color: #66C3FF;
+    text-align: center;
+    margin-right: 100px;
 }
 
 #board {
     alignment: center;
     text-align: center;
-    margin-left: 100px;
+    margin-left: 90px;
     margin-right: auto;
 }
 
@@ -121,13 +108,13 @@ div.bigSeparator {
 
 #definitionsContainer {
     height: 100%;
-    margin-left: -40px;
+    margin-left: -130px;
     width: 40%;
 }
 
 #definitionsRectangle {
-    margin-top: 20%;
-    height: 57%;
+    margin-top: 15%;
+    height: 77%;
     width: 100%;
     border: 4px solid white;
     border-radius: 10px;
@@ -136,18 +123,60 @@ div.bigSeparator {
 .definitionsTitle {
     margin-left: 5px;
     font: 36px Verdana, Geneva, sans-serif;
-    color: skyblue;
+    color: #66C3FF;
+    text-align: center;
 }
 
 .definitionsText {
     margin-left: 5px;
     font: 14px Verdana, Geneva, sans-serif;
+    color: #363732;
+    text-align: center;
+}
+
+#bottomContainer {
+    height: 100px;
+    display: flex;
+    justify-content: space-around;
+    margin-left: 340px;
+    margin-right: 190px;
+    border: 1px solid red;
 }
 
 .button {
-    background-color: #555555;
+    background-color: blueviolet;
     float: left;
     height: 50%;
+    width: 150px;
+    text-align: center;
     margin-top: 30px;
 }
+#cluesSearchContainer{
+    display: flex;
+    justify-content: space-around;
+    border: 1px solid red;
+}
 
+#cluesSearchBar {
+    margin-left: 5px;
+}
+
+#cluesSearchButton {
+    background-position:center;
+    margin-left: -300px;
+    width: 50px;
+    background-image: url("https://www.flaticon.es/svg/vstatic/svg/1086/1086457.svg?token=exp=1619520886~hmac=2712c1cc9a33d2d8ecd059bbc1126cfd");
+    background-repeat: no-repeat;
+}
+
+#cluesResult{
+    margin-left: 5px;
+}
+
+#clues{
+    resize: none;
+}
+
+textarea {
+    resize: none;
+}
