@@ -177,6 +177,6 @@ function searchClues(){
     }
 
     /* Se muestran las palabras y se actualizan las pistas. */
-    document.getElementById('cluesResult').innerText = validWords.toString()
+    document.getElementById('cluesResult').innerHTML = validWords.toString().replaceAll(",", "<br>")
     document.getElementById('cluesLeft').innerHTML = document.getElementById('cluesLeft').innerHTML.replace(cluesLeft, (parseInt(cluesLeft)-1).toString())
 }
