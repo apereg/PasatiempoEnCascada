@@ -1,33 +1,111 @@
-body {
+html {
     margin: 0;
+    height: 100%;
 }
 
-.gameTitle{
-    border-top: 45px;
-    display:block;
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-    background: aquamarine;
+body {
+    background: linear-gradient(to top right, rgb(78, 90, 217), rgb(95, 89, 200), rgb(112, 87, 183), rgb(129, 86, 165), rgb(146, 84, 148), rgb(163, 83, 131), rgba(141, 102, 132, 1), rgba(119, 121, 133, 1), rgba(98, 140, 135, 1), rgba(76, 158, 136, 0.99), rgba(54, 177, 137, 0.99), rgba(32, 196, 138, 0.99));
 }
 
-.searchBar{
-    alignment: center;
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-    color: white;
-    background: white;
+div.separator {
+    height: 10px;
 }
 
-.board{
-    alignment: center;
+div.normalSeparator {
+    height: 20px;
+}
+
+div.bigSeparator {
+    height: 40px;
+}
+
+#container {
+    width: 100%;
+    height: 920px;
+}
+
+#headerContainer {
+    font-family: Century Gothic, CenturyGothic, AppleGothic, sans-serif;
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 400;
     text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-    background: green;
+    background: #889ccf;
+    margin: 0 30% 0;
+    overflow: hidden;
+    padding: 10px;
+    border-radius: 35px 0 35px 0;
+    -moz-border-radius: 35px 0 35px 0;
+    -webkit-border-radius: 35px 0 35px 0;
+}
+
+#mainContainer {
+    display: flex;
+    justify-content: space-around;
+}
+
+#ad1 {
     float: left;
-    width: 40%;
+    border: 2px solid #ccc;
+    height: 700px;
+    width: 10%;
+}
+
+#gameContainer {
+    float: left;
+    height: 700px;
+    width: 80%;
+    display: flex;
+    justify-content: space-around;
+}
+
+#ad2 {
+    float: left;
+    border: 2px solid #ccc;
+    height: 700px;
+    width: 10%;
+}
+
+#bottomContainer {
+    height: 100px;
+    display: flex;
+    justify-content: space-around;
+    margin-left: 190px;
+    margin-right: 190px;
+}
+
+#boardTitleContainer {
+    display: flex;
+    justify-content: space-around;
+}
+
+#boardContainer {
+    margin-left: 50px;
+    height: 695px;
+    width: 35%;
+    border: 4px solid white;
+    border-radius: 10px;
+}
+
+#boardTitle {
+    text-align: left;
+    width: 35%;
+    margin-left: 45px;
+    height: 100%;
+    font: 36px Verdana, Geneva, sans-serif;
+    color: skyblue;
+}
+
+#cluesButton {
+    width: 9%;
+    border: 1px solid red;
+}
+
+#board {
+    alignment: center;
+    text-align: center;
+    margin-left: 100px;
+    margin-right: auto;
 }
 
 .box {
@@ -36,53 +114,40 @@ body {
     text-align: center;
     text-transform: uppercase;
     color: black;
-    width: 30px;
-    height: 30px;
-
+    font: 36px Verdana, Geneva, sans-serif;
+    width: 40px;
+    height: 40px;
 }
 
-.boxCorrect{
-    background-color: #FFFFFF;
-    border-color: gray;
-    text-align: center;
-    text-transform: uppercase;
-    color: black;
-    width: 30px;
-    height: 30px;
-    background-color: #333333;
-}
-
-.boxWrong{
-    background-color: red;
-    border-color: gray;
-    text-align: center;
-    text-transform: uppercase;
-    color: black;
-    width: 30px;
-    height: 30px;
-
-}
-.help{
-    color: white;
-    width: 50%;
-    float: right;
-    background-color: #333333;
-}
-
-.clues{
-    color: white;
-    float: right;
+#definitionsContainer {
+    height: 100%;
+    margin-left: -40px;
     width: 40%;
-    background-color: #444444;
 }
 
-.bottomButtons{
-
+#definitionsRectangle {
+    margin-top: 20%;
+    height: 57%;
     width: 100%;
+    border: 4px solid white;
+    border-radius: 10px;
 }
 
-.button{
+.definitionsTitle {
+    margin-left: 5px;
+    font: 36px Verdana, Geneva, sans-serif;
+    color: skyblue;
+}
+
+.definitionsText {
+    margin-left: 5px;
+    font: 14px Verdana, Geneva, sans-serif;
+}
+
+.button {
     background-color: #555555;
+    float: left;
+    height: 50%;
+    margin-top: 30px;
 }
-
 

@@ -1,63 +1,94 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" crossorigin="anonymous">
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
+    <title>Pasatiempo En Cascada</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="icon" type="image/png" sizes="32x32" href="https://agora.unileon.es/pluginfile.php/1/theme_adaptable/favicon/1618900747/favicon.ico">
-    <title>Pasatiempo en cascada (apereg24)</title>
+    <link rel="icon" type="image/png" sizes="32x32"
+          href="https://agora.unileon.es/pluginfile.php/1/theme_adaptable/favicon/1618900747/favicon.ico">
     <link href="style.css" rel="stylesheet" type="text/css"/>
-    <style> body{background: linear-gradient(163deg, #320404 1px, #790808 14px, transparent 14px),  linear-gradient(161deg, #5e0909 1px, #5f1f1f 2px, #8A0808 15px, transparent 15px),  linear-gradient(343deg, #8A0808 1px, #8A0808 14px, transparent 14px),  linear-gradient(343deg, #8A0808 1px, #8A0808 14px, transparent 14px); background-color:#000; background-position: 2px 1px, 23px 16px,48px 15px, 21px 30px; background-size: 48px 30px; } </style>
     <script src="main.js"></script>
 </head>
-<body onload="launch()">
-
-<div class="gameTitle">
-    <img src="./../resources/titulo.png" width="823" height=90 alt="">
-</div>
-
-<div class="searchBar">
-    <h1>Iria eso de buscar</h1>
-</div>
-
-<div class="board">
-    <table id="tableFour"></table>
-    <table id="tableSix"></table>
-</div>
-
-<div class="help">
-    <p>Identifique la primera palabra y la última de cada bloque con las pistas que se dan. A continuacion, trate de
-        describir las palabras intermedias. Para lograrlo, cambie una letra de la primera palabra para obtener la
-        próxima y, después, altere el orden de una o varias letras para encontrar la siguiente. Siga así,
-        sucesivamente,
-        hasta que logre completar ambos casilleros. Todas las palabras intermedias deben tener significado.</p>
-</div>
-
-<div class="clues">
-    <p>Definiciones</p>
-    <p>1 - Familia en Escocia</p>
-    <p>2 - Tristeza y dolor por algo</p>
-    <p>3 - Termino algo definitivamente</p>
-    <p>4 - El que torea</p>
-</div>
-
-<div class="bottomButtons">
-    <div class="button">
-        <button>
-            Almacenar
-        </button>
+<body onload=launch()>
+<div id="container">
+    <div class="separator"></div>
+    <div id="headerContainer">
+        <p>Pasatiempo en cascada por apereg24</p>
     </div>
-    <div class="button">
-        <button>
-            Cargar
-        </button>
+    <div class="normalSeparator"></div>
+    <div id="mainContainer">
+        <div id="ad1">
+            a
+        </div>
+        <div id="gameContainer">
+            <div id="boardContainer">
+                <div class="normalSeparator"></div>
+                <div id="boardTitleContainer">
+                    <div id="boardTitle">
+                        Tablero
+                    </div>
+                    <div id="cluesButton">
+                        B
+                    </div>
+                </div>
+                <div class="normalSeparator"></div>
+                <div id="board">
+                    <table id="tableFour"></table>
+                    <table id="tableSix"></table>
+                </div>
+            </div>
+            <div id="definitionsContainer">
+                <div id="definitionsRectangle">
+                    <div class="separator"></div>
+                    <div class="definitionsTitle">
+                        Definiciones
+                    </div>
+                    <div class="separator"></div>
+                    <div class="definitionsText">
+                        1 - Familia en Escocia <br>
+                        2 - Tristeza y dolor por algo <br>
+                        3 - Termino algo definitivamente <br>
+                        4 - El que torea
+                    </div>
+                    <div class="normalSeparator"></div>
+                    <div class="definitionsTitle">
+                        Como jugar
+                    </div>
+                    <div class="separator"></div>
+                    <div class="definitionsText">
+                        Identifique la primera palabra y la última de cada bloque con las pistas que se dan. <br>
+                        A continuacion, trate de describir las palabras intermedias. <br>
+                        Para lograrlo, cambie una letra de la primera palabra para obtener la próxima y, después, altere
+                        el orden de una o varias letras para encontrar la siguiente. <br>
+                        Siga así, sucesivamente, hasta que logre completar ambos casilleros.<br>
+                        Todas las palabras intermedias deben tener significado.
+                    </div>
+                    <div class="separator"></div>
+                    <div class="definitionsTitle">
+                        <text id="cluesLeft"> Pistas restantes: 3</text>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div id="ad2">
+            c
+        </div>
     </div>
-    <div class="button">
-        <button>
-            Limpiar
-        </button>
+    <div id="bottomContainer">
+        <div class="button">
+            Limpiar almacenamiento
+        </div>
+        <div class="button">
+            Limpiar pasatiempos
+        </div>
+        <div class="button">
+            Guardar en memoria
+        </div>
+        <div class="button">
+            Cargar de memoria
+        </div>
     </div>
 </div>
-
-
 </body>
 </html>
