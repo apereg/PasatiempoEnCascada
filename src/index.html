@@ -9,7 +9,7 @@
     <link href="style.css" rel="stylesheet" type="text/css"/>
     <script src="main.js"></script>
 </head>
-<body onload=launch()>
+<body onload=createTable()>
 <div id="container">
     <div class="separator"></div>
     <div id="headerContainer">
@@ -18,7 +18,7 @@
     <div class="normalSeparator"></div>
     <div id="mainContainer">
         <div id="ad1">
-            <a href="https://github.com/apereg"> <img src="./../resources/ad1.jpg" width="185"></a>
+            <a href="https://github.com/apereg"> <img src="./../resources/ad1.jpg" width="185" alt=""></a>
         </div>
         <div id="gameContainer">
             <div id="boardContainer">
@@ -65,13 +65,14 @@
                     <div class='separator'></div>
                     <div id='cluesSearchContainer'>
                         <div id='cluesSearchBar'>
-                            <input type='text' width='100%' id='cluesSearcherInput'>
+                            <label for='cluesSearcherInput'></label><input type='text' width='100%'
+                                                                           id='cluesSearcherInput'
+                                                                           placeholder='Ejemplo: "CLAN"'>
                         </div>
                         <div id="cluesSearchButton">
-                            <input type="button" id='cluesSearcherButton' onClick='searchClues()'></input>
+                            <input type="button" id='cluesSearcherButton' value="🔎" onClick='searchClues()'/>
                         </div>
                     </div>
-                    <div class="normalSeparator"></div>
                     <div id="cluesResult"></div>
                     <div class="separator"></div>
                 </div>
@@ -83,10 +84,12 @@
         </div>
     </div>
     <div id="bottomContainer">
-        <input type="text" readonly class="button" value="a"></input>
-        <input type="text" readonly class="button" value="b"></input>
-        <input type="text" readonly class="button" value="c"></input>
-        <input type="text" readonly class="button" value="d"></input>
+        <div id="buttonsContainer">
+            <input type="button" class="button" id="saveButton" onClick="saveOnLocal()" value="Guardar pasatiempos">
+            <input type="button" class="button" id="loadButton" onClick="loadFromLocal()" value="Cargar pasatiempo">
+            <input type="button" class="button" id="cleanMemoryButton" onClick="cleanMemory()" value="Limpiar memoria">
+            <input type="button" class="button" id="cleanButton" onClick="cleanTables()" value="Vaciar pasatiempo"/>
+        </div>
     </div>
 </div>
 </body>

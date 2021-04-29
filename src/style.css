@@ -8,6 +8,25 @@ body {
     display: inline-block;
 }
 
+table{
+    font: 14px Verdana, Geneva, sans-serif;
+    color: #363732;
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+}
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+}
+
 div.separator {
     height: 10px;
 }
@@ -80,7 +99,6 @@ div.bigSeparator {
 }
 
 #boardTitle {
-    text-align: left;
     height: 50px;
     font: 36px Verdana, Geneva, sans-serif;
     color: #66C3FF;
@@ -96,14 +114,22 @@ div.bigSeparator {
 }
 
 .box {
-    background-color: #FFFFFF;
-    border-color: gray;
+    background-color: transparent;
+    border: 1px solid white;
     text-align: center;
     text-transform: uppercase;
-    color: black;
+    color: white;
     font: 36px Verdana, Geneva, sans-serif;
     width: 40px;
     height: 40px;
+}
+
+.boxCorrect {
+    background-color: lightgreen;
+}
+
+.boxWrong {
+    background-color: indianred;
 }
 
 #definitionsContainer {
@@ -136,57 +162,88 @@ div.bigSeparator {
 
 #bottomContainer {
     height: 100px;
+    margin-left: 0;
+}
+
+#buttonsContainer {
+    width: 125vmin;
+    height: 100%;
+    margin-left: 39vmin;
     display: flex;
     justify-content: space-around;
-    margin-left: 340px;
-    margin-right: 190px;
-    border: 1px solid red;
 }
 
 .button {
-    background-color: blueviolet;
+    font: 13px Verdana, Geneva, sans-serif;
+    font-weight: bold;
+    background-color: transparent;
+    border-radius: 20px;
+    border: 2px solid white;
+    color: #6aa9ff;
     float: left;
-    height: 50%;
-    width: 150px;
+    height: 6vmin;
+    width: 20vmin;
     text-align: center;
-    margin-top: 30px;
+    margin-top: 5vmin;
 }
-#cluesSearchContainer{
+
+.button:hover{
+    background-color: grey;
+    cursor: pointer;
+}
+.button:active {
+    box-shadow: 0 5px #333;
+    transform: translateY(4px);
+}
+
+
+#cluesSearchContainer {
     display: flex;
     justify-content: space-around;
-    border: 1px solid red;
 }
 
 #cluesSearchBar {
     margin-left: 5px;
 }
 
-#cluesSearchButton {
-    background-position:center;
-    margin-left: -300px;
-    width: 50px;
-    background-image: url("https://www.flaticon.es/svg/vstatic/svg/1086/1086457.svg?token=exp=1619520886~hmac=2712c1cc9a33d2d8ecd059bbc1126cfd");
-    background-repeat: no-repeat;
+#cluesSearcherInput {
+    background: transparent;
+    font: 14px Verdana, Geneva, sans-serif;
+    color: #363732;
+    border-radius: 2vmin;
+    border: 2px solid white;
+    width: 15vmin;
+    margin-left: 7vmin;
+    height: 2vmin;
 }
 
-#cluesResult{
-    margin-left: 5px;
+#cluesSearcherButton {
+    background: transparent;
+    margin-left: -15vmin;
+    border-radius: 2vmin;
+    margin-top: -0.1vmin;
+    width: 5vmin;
+    border: 2px solid white;
+    height: 2.8vmin;
 }
 
-#clues{
-    resize: none;
-}
-
-textarea {
-    resize: none;
+#cluesSearcherButton:hover {
+    cursor: pointer;
+    background-color: darkgrey;
 }
 
 #cluesResult {
-     border : solid 2px #5878ca;
-     background : #ffffff;
-     color : #000000;
-     width : 99%;
-     height : 20%;
-     overflow : auto;
+    text-align: justify;
+    font: 14px Verdana, Geneva, sans-serif;
+    color: #363732;
+    background: transparent;
+    width: 21.4vmin;
+    margin-left: 17vmin;
+    margin-top: 0.5vmin;
+    height: 12vmin;
+    overflow: auto;
+}
 
- }
+#tableSix{
+   margin-top: -0.2vmin;
+}
