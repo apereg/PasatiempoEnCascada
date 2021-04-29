@@ -1,18 +1,19 @@
 let dictionary = []
 
-    /* Funcion a ejecutar nada mas arrancar la pagina para cargar el diccionario. */
-    (async function () {
-        dictionary = await getDictionary();
-        dictionary.push("REMATO");
-        dictionary.push("NACÍ");
-        dictionary.push("NACE");
-        dictionary.push("TOLERO")
-    })()
-
 async function getDictionary() {
     /* Se utiliza fetch para realizar la peticion de forma asincrona. */
     return (await (await fetch('https://ordenalfabetix.unileon.es/aw/diccionario.txt')).text()).toUpperCase().split('\n')
 }
+
+(async function () {
+    /* Funcion a ejecutar nada mas cargar la pagina para cargar el diccionario. */
+    dictionary = await getDictionary();
+    dictionary.push("REMATO");
+    dictionary.push("NACÍ");
+    dictionary.push("NACE");
+    dictionary.push("TOLERO")
+})()
+
 
 function createTable() {
     let table = "<table>";

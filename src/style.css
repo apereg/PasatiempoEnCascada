@@ -217,6 +217,10 @@ div.bigSeparator {
     height: 2vmin;
 }
 
+#cluesSearcherInput::placeholder{
+    color: rgba(6,10,21,0.54);
+}
+
 #cluesSearcherButton {
     background: transparent;
     margin-left: -15vmin;
