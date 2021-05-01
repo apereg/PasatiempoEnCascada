@@ -196,6 +196,12 @@ div.bigSeparator {
     transform: translateY(4px);
 }
 
+.button:disabled {
+    border: 2px solid gray;
+    box-shadow: 0 5px #333;
+    transform: translateY(4px);
+    cursor: not-allowed;
+}
 
 #cluesSearchContainer {
     display: flex;

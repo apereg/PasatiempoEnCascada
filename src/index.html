@@ -7,7 +7,11 @@
     <link rel="icon" type="image/png" sizes="32x32"
           href="https://agora.unileon.es/pluginfile.php/1/theme_adaptable/favicon/1618900747/favicon.ico">
     <link href="style.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" type="text/css"
+          href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css"/>
     <script src="main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body onload=createTable()>
 <div id="container">
@@ -18,7 +22,7 @@
     <div class="normalSeparator"></div>
     <div id="mainContainer">
         <div id="ad1">
-            <a href="https://github.com/apereg"> <img src="./../resources/ad1.jpg" width="185" alt=""></a>
+            <a href="https://github.com/apereg"> <img src="https://i.imgur.com/EWNq5jW.jpg" width="185" alt=""></a>
         </div>
         <div id="gameContainer">
             <div id="boardContainer">
@@ -65,9 +69,7 @@
                     <div class='separator'></div>
                     <div id='cluesSearchContainer'>
                         <div id='cluesSearchBar'>
-                            <label for='cluesSearcherInput'></label><input type='text' width='100%'
-                                                                           id='cluesSearcherInput'
-                                                                           placeholder='Ejemplo: "CLAN"'>
+                            <label for='cluesSearcherInput'></label> <input type='text' width='100%' id='cluesSearcherInput' placeholder='Ejemplo: "CLAN"' onkeyup="function cluesSearcherOnKeyUp(event) {if(event.keyCode === '13') searchClues()}">
                         </div>
                         <div id="cluesSearchButton">
                             <input type="button" id='cluesSearcherButton' value="🔎" onClick='searchClues()'/>
@@ -80,7 +82,7 @@
 
         </div>
         <div id="ad2">
-            <a href="https://github.com/apereg"> <img src="./../resources/ad2.jpg" width="185"></a>
+            <a href="https://github.com/apereg"> <img src="https://i.imgur.com/StF88DT.jpg" width="185" alt=""></a>
         </div>
     </div>
     <div id="bottomContainer">

@@ -1,5 +1,33 @@
 let dictionary = []
 
+/* GESTION DE LAS COOKIES. */
+window.addEventListener("load", function () {
+    window.cookieconsent.initialise({
+        "palette": {"popup": {"background": "#3c404d"}, "button": {"background": "#14a7d0"}},
+        "type": "opt-in",
+        "content": {
+            "message": "Se requieren cookies para el almacenamiento de pasatiempos",
+            "allow": "Aceptar",
+            "deny": "Rechazar",
+            "link": "¿Que son las cookies?"
+        },
+        onInitialise(status) {
+            console.log("status cookies inicial: " + status)
+            if (status === cookieconsent.status.allow)
+                enableStorage()
+            else
+                disableStorage()
+        },
+        onStatusChange(status) {
+            console.log("Estado de cookies cambiadas")
+            if (status === "allow")
+                enableStorage()
+            else
+                disableStorage()
+        }
+    })
+})
+
 async function getDictionary() {
     /* Se utiliza fetch para realizar la peticion de forma asincrona. */
     return (await (await fetch('https://ordenalfabetix.unileon.es/aw/diccionario.txt')).text()).toUpperCase().split('\n')
@@ -7,22 +35,22 @@ async function getDictionary() {
 
 (async function () {
     /* Funcion a ejecutar nada mas cargar la pagina para cargar el diccionario. */
-    dictionary = await getDictionary();
-    dictionary.push("REMATO");
-    dictionary.push("NACÍ");
-    dictionary.push("NACE");
+    dictionary = await getDictionary()
+    dictionary.push("REMATO")
+    dictionary.push("NACI")
+    dictionary.push("NACÍ")
+    dictionary.push("NACE")
     dictionary.push("TOLERO")
 })()
 
-
 function createTable() {
-    let table = "<table>";
+    let table = "<table>"
     console.log(" Creando tabla")
 
     for (let i = 0; i < 6; i++) {
         table += "<tr>"
         for (let j = 0; j < 4; j++)
-            table += "<td class='box'><input type='text' maxLength='1' class='box' onKeyUp=checkBoardFour()></td>"
+            table += "<td class='box'><input type='text' maxLength='1' class='box' onkeyup='checkBoard(0)' checkBoardFour()></td>"
         if (i === 0) table += "<th>1</th>"
         if (i === 5) table += "<th>2</th>"
         table += "</tr>"
@@ -33,12 +61,188 @@ function createTable() {
     for (let i = 0; i < 6; i++) {
         table += "<tr>"
         for (let j = 0; j < 6; j++)
-            table += "<td class='box'><input type='text' maxLength='1' class='box' onKeyUp=checkBoardSix()></td>"
+            table += "<td class='box'><input type='text' maxLength='1' class='box' onkeyup='checkBoard(1)' </td>"
         if (i === 0) table += "<th>3</th>"
         if (i === 5) table += "<th>4</th>"
         table += "</tr>"
     }
     document.getElementById("tableSix").innerHTML = table + "</table>"
+}
+
+function checkBoard(table) {
+    if (table === 0) {
+        if (checkBoardFour() && checkBoardSix())
+            swal({
+                title: "Oleeeeeeeeeee",
+                text: "Pasatiempo completado",
+                icon: "success"
+            });
+    } else {
+        if (checkBoardSix() && checkBoardFour())
+            swal({
+                title: "Oleeeeeeeeeee",
+                text: "Pasatiempo completado",
+                icon: "success"
+            });
+    }
+
+}
+
+function checkBoardFour() {
+    let returnValue = true
+    const table = document.getElementById("tableFour")
+    for (let i = 0; i < table.rows.length; i++) {
+        let word = mapWord(table.rows[i].getElementsByTagName('td'))
+        if (word.length === 4) {
+            if (dictionary.includes(word)) {
+                if (i === 0) {
+                    if (word === "CLAN"){
+                        markCorrect(table.rows[i].getElementsByTagName('td'))
+                    } else {
+                        markFalse(table.rows[i].getElementsByTagName('td'))
+                        returnValue = false
+                    }
+                } else if (i === table.rows.length - 1) {
+                    if (word === "PENA"){
+                        markCorrect(table.rows[i].getElementsByTagName('td'))
+                    } else {
+                        markFalse(table.rows[i].getElementsByTagName('td'))
+                        returnValue = false
+                    }
+                } else {
+                    if (!compareWithLastWord(table, i, word))
+                        returnValue = false
+                }
+            } else {
+                swal({
+                    title: "Palabra incorrecta",
+                    text: "La palabra " + word.toLowerCase() + " no existe en el diccionario",
+                    icon: "error",
+                    button: "¡Entendido!"
+                });
+                deleteLastChar(table.rows[i].getElementsByTagName('td'))
+                returnValue = false
+            }
+        } else {
+            if (i === 0 || i === table.rows.length - 1)
+                cleanCorrectEffect(table.rows[i].getElementsByTagName('td'))
+            returnValue = false
+        }
+    }
+
+    return returnValue
+}
+
+function checkBoardSix() {
+    let returnValue = true
+    const table = document.getElementById("tableSix")
+    for (let i = 0; i < table.rows.length; i++) {
+        let word = mapWord(table.rows[i].getElementsByTagName('td'))
+        if (word.length === 6) {
+            if (dictionary.includes(word)) {
+                if (i === 0) {
+                    if (word === "REMATO"){
+                        markCorrect(table.rows[i].getElementsByTagName('td'))
+                    } else {
+                        markFalse(table.rows[i].getElementsByTagName('td'))
+                        returnValue = false
+                    }
+                } else if (i === table.rows.length - 1) {
+                    if (word === "TORERO"){
+                        markCorrect(table.rows[i].getElementsByTagName('td'))
+                    } else {
+                        markFalse(table.rows[i].getElementsByTagName('td'))
+                        returnValue = false
+                    }
+                } else {
+                    if (!compareWithLastWord(table, i, word))
+                        returnValue = false
+                }
+            } else {
+                swal({
+                    title: "Palabra incorrecta",
+                    text: "La palabra " + mapWord(word).toLowerCase() + " no existe en el diccionario",
+                    icon: "error",
+                    button: "¡Entendido!"
+                });
+                deleteLastChar(table.rows[i].getElementsByTagName('td'))
+                returnValue = false
+            }
+        } else {
+            if (i === 0 || i === table.rows.length - 1)
+                cleanCorrectEffect(table.rows[i].getElementsByTagName('td'))
+            returnValue = false
+        }
+    }
+
+    return returnValue
+}
+
+function mapWord(cells) {
+    let word = ""
+    for (let j = 0; j < cells.length; j++)
+        word += cells[j].getElementsByTagName("input")[0].value
+    return word.toUpperCase()
+}
+
+function compareWithLastWord(table, index, word) {
+    let lastWord = mapWord(table.rows[index - 1].getElementsByTagName('td'))
+    if (dictionary.includes(lastWord)) {
+        if (!checkVeracity(word, lastWord, index)) {
+            swal({
+                title: "¡Respeta las reglas!",
+                text: word[0] + word.substr(1).toLowerCase() + "no cumple las condiciones respecto a " + lastWord.toLowerCase(),
+                icon: "error",
+                button: "¡Entendido!"
+            });
+            deleteLastChar(table.rows[index].getElementsByTagName('td'))
+            return false
+        }
+    } else {
+        swal({
+            title: "¡Respeta las reglas!",
+            text: "Completa la palabra anterior primero",
+            icon: "error",
+            button: "¡Entendido!"
+        });
+        return false
+    }
+    return true
+}
+
+function deleteLastChar(word) {
+    word[word.length - 1].getElementsByTagName('input')[0].value = ""
+    word[word.length - 1].focus()
+}
+
+function cleanCorrectEffect(cells) {
+    for (let j = 0; j < cells.length; j++) {
+        cells[j].getElementsByTagName("input")[0].classList.remove("boxCorrect")
+    }
+}
+
+function checkVeracity(word1, word2, index) {
+    return ((index % 2 === 0) ? checkCross(word1, word2) : checkChange(word1, word2))
+}
+
+function checkCross(word1, word2) {
+    /* Comprobacion a mano ya que la tilde en la i no cumple los requisitos del juego. */
+    if (word1 === "NACÍ" && word2 === "CIAN")
+        return true
+
+    let coincidences = 0
+    for (let i = 0; i < word1.length; i++)
+        if (word1.includes(word2[i]))
+            coincidences++
+    return coincidences === word1.length;
+}
+
+function checkChange(word1, word2) {
+    let coincidences = 0
+    for (let i = 0; i < word1.length; i++)
+        if (word1[i] === word2[i])
+            coincidences++
+    return coincidences === word1.length - 1;
 }
 
 function markCorrect(cells) {
@@ -48,128 +252,37 @@ function markCorrect(cells) {
 }
 
 function markFalse(word) {
-    alert("Palabra incorrecta (" + mapWord(word) + ")")
+    swal({
+        title: "Palabra incorrecta",
+        text: "La definicion no concuerda con " + mapWord(word).toLowerCase(),
+        icon: "error",
+        button: "¡Entendido!"
+    });
     deleteLastChar(word)
     cleanCorrectEffect(word)
-}
-
-function cleanCorrectEffect(cells) {
-    for (let j = 0; j < cells.length; j++) {
-        cells[j].getElementsByTagName("input")[0].classList.remove("boxCorrect")
-    }
-}
-
-function checkBoardFour() {
-    const table = document.getElementById("tableFour")
-    for (let i = 0; i < table.rows.length; i++) {
-        let word = mapWord(table.rows[i].getElementsByTagName('td'))
-        if (word.length === 4) {
-            if (dictionary.includes(word)) {
-                if (i === 0)
-                    ((word === "CLAN") ? markCorrect(table.rows[i].getElementsByTagName('td')) : markFalse(table.rows[i].getElementsByTagName('td')))
-                else if (i === table.rows.length - 1)
-                    ((word === "PENA") ? markCorrect(table.rows[i].getElementsByTagName('td')) : markFalse(table.rows[i].getElementsByTagName('td')))
-                else
-                    compareWithLastWord(table, i, word);
-            } else {
-                alert("La palabra " + word + " no esta registrada en el diccionario")
-                deleteLastChar(table.rows[i].getElementsByTagName('td'))
-            }
-        } else {
-            if (i === 0 || i === table.rows.length - 1)
-                cleanCorrectEffect(table.rows[i].getElementsByTagName('td'))
-        }
-    }
-}
-
-function compareWithLastWord(table, index, word) {
-    let lastWord = mapWord(table.rows[index - 1].getElementsByTagName('td'))
-    if (dictionary.includes(lastWord)) {
-        if (!checkVeracity(word, lastWord, index)) {
-            alert("Palabra incorrecta: " + word + " (No cumple las condiciones respecto a " + lastWord + ")")
-            deleteLastChar(table.rows[index].getElementsByTagName('td'))
-        }
-    } else {
-        alert("Complete antes la palabra anterior a " + word)
-    }
-}
-
-function checkBoardSix() {
-    const table = document.getElementById("tableSix")
-    for (let i = 0; i < table.rows.length; i++) {
-        let word = mapWord(table.rows[i].getElementsByTagName('td'))
-        if (word.length === 6) {
-            if (dictionary.includes(word)) {
-                if (i === 0)
-                    ((word === "REMATO") ? markCorrect(table.rows[i].getElementsByTagName('td')) : markFalse(table.rows[i].getElementsByTagName('td')))
-                else if (i === table.rows.length - 1)
-                    ((word === "TORERO") ? markCorrect(table.rows[i].getElementsByTagName('td')) : markFalse(table.rows[i].getElementsByTagName('td')))
-                else
-                    compareWithLastWord(table, i, word);
-
-            } else {
-                alert("La palabra " + word + " no esta registrada en el diccionario")
-                deleteLastChar(table.rows[i].getElementsByTagName('td'))
-            }
-        } else {
-            if (i === 0 || i === table.rows.length - 1)
-                cleanCorrectEffect(table.rows[i].getElementsByTagName('td'))
-        }
-    }
-}
-
-function deleteLastChar(word) {
-    word[word.length - 1].getElementsByTagName('input')[0].value = ""
-    word[word.length - 1].focus()
-}
-
-function mapWord(cells) {
-    let word = ""
-    for (let j = 0; j < cells.length; j++) {
-        word += cells[j].getElementsByTagName("input")[0].value
-    }
-    return word.toUpperCase()
-}
-
-function checkVeracity(word1, word2, index) {
-    console.log(index)
-    return ((index % 2 === 0) ? checkCross(word1, word2) : checkChange(word1, word2))
-}
-
-function checkCross(word1, word2) {
-    console.log("Se llega el check cross con " + word1 + " y " + word2)
-    let coincidences = 0
-    for (let i = 0; i < word1.length; i++)
-        if (word1.includes(word2[i]))
-            coincidences++
-    return coincidences === word1.length;
-}
-
-function checkChange(word1, word2) {
-    console.log("Se llega el check change con " + word1 + " y " + word2)
-    let coincidences = 0
-    for (let i = 0; i < word1.length; i++)
-        if (word1[i] === word2[i])
-            coincidences++
-    return coincidences === word1.length - 1;
 }
 
 function searchClues() {
     /* Se obtienen las pistas restantes para si son 0 no seguir con la operacion. */
     let cluesLeft = document.getElementById('cluesLeft').innerHTML.substring(19);
     if (parseInt(cluesLeft) === 0) {
-        alert("¡No te quedan más pistas!")
+        swal({title: "Intentalo tu solo", text: "¡No te quedan más pistas!", icon: "error", button: "¡Entendido!"});
         return;
     }
 
     /* Se mapea las palabras de busqueda en un array ordenado alfabeticamente. */
-    const aux = document.getElementById('cluesSearchBar').getElementsByTagName('input')[0].value.toUpperCase()
+    const rawWord = document.getElementById('cluesSearchBar').getElementsByTagName('input')[0].value.toUpperCase()
     let letters = []
-    for (let i = 0; i < aux.length; i++)
-        letters.push(aux[i])
+    for (let i = 0; i < rawWord.length; i++)
+        letters.push(rawWord[i])
 
     if (letters.length === 0) {
-        alert("¡El campo de las letras esta vacio!")
+        swal({
+            title: "No se encontraron pistas",
+            text: "El campo de las pistas está vacio",
+            icon: "warning",
+            button: "¡Entendido!"
+        });
         return
     }
     letters = letters.sort()
@@ -203,15 +316,47 @@ function searchClues() {
 }
 
 function saveOnLocal() {
-    console.log("save")
+    let iterator = 0
+    saveTableOnLocal(document.getElementById("tableFour"))
+    saveTableOnLocal(document.getElementById("tableSix"))
+
+    function saveTableOnLocal(table) {
+        for (let i = 0; i < table.rows.length; i++) {
+            const cells = table.rows[i].getElementsByTagName('td')
+            for (let j = 0; j < cells.length; j++)
+                localStorage.setItem((iterator++).toString(), cells[j].getElementsByTagName("input")[0].value)
+
+        }
+    }
+
+    document.getElementById('loadButton').disabled = false;
 }
 
 function loadFromLocal() {
     console.log("load")
+    let iterator = 0
+    loadTableFromLocal(document.getElementById("tableFour"))
+    loadTableFromLocal(document.getElementById("tableSix"))
+
+    function loadTableFromLocal(table) {
+        for (let i = 0; i < table.rows.length; i++) {
+            const cells = table.rows[i].getElementsByTagName('td')
+            for (let j = 0; j < cells.length; j++) {
+                cells[j].getElementsByTagName("input")[0].value = localStorage.getItem((iterator++).toString())
+                console.log("Se guarda en" + iterator)
+            }
+        }
+    }
 }
 
 function cleanMemory() {
-    console.log("cleanMemori")
+    let i = 0
+    while (localStorage.getItem(i.toString()) !== null) {
+        localStorage.setItem(i.toString(), null)
+        i++
+    }
+    if (!document.getElementById('loadButton').disabled)
+        document.getElementById('loadButton').disabled = true
 }
 
 function cleanTables() {
@@ -230,3 +375,16 @@ function cleanTable(table) {
                 cells[j].getElementsByTagName('input')[0].classList.remove('boxCorrect')
     }
 }
+
+function enableStorage() {
+    document.getElementById('saveButton').disabled = false;
+    document.getElementById('loadButton').disabled = localStorage.length === 0;
+    document.getElementById('cleanMemoryButton').disabled = false;
+}
+
+function disableStorage() {
+    document.getElementById('saveButton').disabled = true;
+    document.getElementById('loadButton').disabled = true;
+    document.getElementById('cleanMemoryButton').disabled = true;
+}
+
