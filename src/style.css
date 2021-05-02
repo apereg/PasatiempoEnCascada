@@ -8,7 +8,7 @@ body {
     display: inline-block;
 }
 
-table{
+table {
     font: 14px Verdana, Geneva, sans-serif;
     color: #363732;
 }
@@ -16,15 +16,17 @@ table{
 ::-webkit-scrollbar {
     width: 12px;
 }
+
 ::-webkit-scrollbar-track {
     box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     border-radius: 10px;
 }
+
 ::-webkit-scrollbar-thumb {
     box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     border-radius: 10px;
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
 }
 
 div.separator {
@@ -187,10 +189,11 @@ div.bigSeparator {
     margin-top: 5vmin;
 }
 
-.button:hover{
+.button:hover {
     background-color: grey;
     cursor: pointer;
 }
+
 .button:active {
     box-shadow: 0 5px #333;
     transform: translateY(4px);
@@ -223,8 +226,8 @@ div.bigSeparator {
     height: 2vmin;
 }
 
-#cluesSearcherInput::placeholder{
-    color: rgba(6,10,21,0.54);
+#cluesSearcherInput::placeholder {
+    color: rgba(6, 10, 21, 0.54);
 }
 
 #cluesSearcherButton {
@@ -254,6 +257,6 @@ div.bigSeparator {
     overflow: auto;
 }
 
-#tableSix{
-   margin-top: -0.2vmin;
+#tableSix {
+    margin-top: -0.2vmin;
 }

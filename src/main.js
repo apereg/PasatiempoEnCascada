@@ -12,14 +12,12 @@ window.addEventListener("load", function () {
             "link": "¿Que son las cookies?"
         },
         onInitialise(status) {
-            console.log("status cookies inicial: " + status)
             if (status === cookieconsent.status.allow)
                 enableStorage()
             else
                 disableStorage()
         },
         onStatusChange(status) {
-            console.log("Estado de cookies cambiadas")
             if (status === "allow")
                 enableStorage()
             else
@@ -45,12 +43,11 @@ async function getDictionary() {
 
 function createTable() {
     let table = "<table>"
-    console.log(" Creando tabla")
 
     for (let i = 0; i < 6; i++) {
         table += "<tr>"
         for (let j = 0; j < 4; j++)
-            table += "<td class='box'><input type='text' maxLength='1' class='box' onkeyup='checkBoard(0)' checkBoardFour()></td>"
+            table += "<td class='box'><input type='text' maxLength='1' class='box' onkeyup='checkBoard(0)'></td>"
         if (i === 0) table += "<th>1</th>"
         if (i === 5) table += "<th>2</th>"
         table += "</tr>"
@@ -61,12 +58,16 @@ function createTable() {
     for (let i = 0; i < 6; i++) {
         table += "<tr>"
         for (let j = 0; j < 6; j++)
-            table += "<td class='box'><input type='text' maxLength='1' class='box' onkeyup='checkBoard(1)' </td>"
+            table += "<td class='box'><input type='text' maxLength='1' class='box' onkeyup='checkBoard(1)'></td>"
         if (i === 0) table += "<th>3</th>"
         if (i === 5) table += "<th>4</th>"
         table += "</tr>"
     }
     document.getElementById("tableSix").innerHTML = table + "</table>"
+
+    /* Si hay algun pasatiempo guardado se carga */
+    if (localStorage.length !== 0)
+        loadFromLocal()
 }
 
 function checkBoard(table) {
@@ -96,14 +97,14 @@ function checkBoardFour() {
         if (word.length === 4) {
             if (dictionary.includes(word)) {
                 if (i === 0) {
-                    if (word === "CLAN"){
+                    if (word === "CLAN") {
                         markCorrect(table.rows[i].getElementsByTagName('td'))
                     } else {
                         markFalse(table.rows[i].getElementsByTagName('td'))
                         returnValue = false
                     }
                 } else if (i === table.rows.length - 1) {
-                    if (word === "PENA"){
+                    if (word === "PENA") {
                         markCorrect(table.rows[i].getElementsByTagName('td'))
                     } else {
                         markFalse(table.rows[i].getElementsByTagName('td'))
@@ -141,14 +142,14 @@ function checkBoardSix() {
         if (word.length === 6) {
             if (dictionary.includes(word)) {
                 if (i === 0) {
-                    if (word === "REMATO"){
+                    if (word === "REMATO") {
                         markCorrect(table.rows[i].getElementsByTagName('td'))
                     } else {
                         markFalse(table.rows[i].getElementsByTagName('td'))
                         returnValue = false
                     }
                 } else if (i === table.rows.length - 1) {
-                    if (word === "TORERO"){
+                    if (word === "TORERO") {
                         markCorrect(table.rows[i].getElementsByTagName('td'))
                     } else {
                         markFalse(table.rows[i].getElementsByTagName('td'))
@@ -317,23 +318,41 @@ function searchClues() {
 
 function saveOnLocal() {
     let iterator = 0
+    let voidBoard = true
     saveTableOnLocal(document.getElementById("tableFour"))
     saveTableOnLocal(document.getElementById("tableSix"))
 
     function saveTableOnLocal(table) {
         for (let i = 0; i < table.rows.length; i++) {
             const cells = table.rows[i].getElementsByTagName('td')
-            for (let j = 0; j < cells.length; j++)
+            for (let j = 0; j < cells.length; j++) {
+                if (cells[j].getElementsByTagName("input")[0].value !== "")
+                    voidBoard = false
                 localStorage.setItem((iterator++).toString(), cells[j].getElementsByTagName("input")[0].value)
-
+            }
         }
     }
 
-    document.getElementById('loadButton').disabled = false;
+    if (voidBoard) {
+        swal({
+            title: "Nada que guardar",
+            text: "El tablero está vacio",
+            icon: "error",
+            button: "¡Entendido!"
+        });
+    } else {
+        document.getElementById('loadButton').disabled = false;
+        swal({
+            title: "Guardado",
+            text: "Podras retomar tu pasatiempo la proxima vez que accedas",
+            icon: "success",
+            button: "¡Entendido!"
+        });
+    }
 }
 
+
 function loadFromLocal() {
-    console.log("load")
     let iterator = 0
     loadTableFromLocal(document.getElementById("tableFour"))
     loadTableFromLocal(document.getElementById("tableSix"))
@@ -342,8 +361,8 @@ function loadFromLocal() {
         for (let i = 0; i < table.rows.length; i++) {
             const cells = table.rows[i].getElementsByTagName('td')
             for (let j = 0; j < cells.length; j++) {
-                cells[j].getElementsByTagName("input")[0].value = localStorage.getItem((iterator++).toString())
-                console.log("Se guarda en" + iterator)
+                if (cells[j].getElementsByTagName("input")[0].value !== null)
+                    cells[j].getElementsByTagName("input")[0].value = localStorage.getItem((iterator++).toString())
             }
         }
     }
@@ -357,6 +376,12 @@ function cleanMemory() {
     }
     if (!document.getElementById('loadButton').disabled)
         document.getElementById('loadButton').disabled = true
+    swal({
+        title: "¡Listo jefe!",
+        text: "Se han limpiado los pasatiempos guardados",
+        icon: "success",
+        button: "¡Perfecto!"
+    });
 }
 
 function cleanTables() {
