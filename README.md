@@ -17,13 +17,20 @@ La página web deberá permitir:
 ## Resultado gráfico
 
 ### Web por defecto
+<img  src="resources/default.png">
 
 ### Pasatiempo resuelto
+<img  src="resources/alsoCompleted.png">
 
-### Cookies aceptadas
+<img  src="resources/completed.png">
+
+### Solicitud de cookies
+<img  src="resources/cookiesAsking.png">
 
 ### Cookies rechazadas
+<img  src="resources/cookiesRejected.png">
 
-### Solicitud de pista
+### Ejemplo de pista
+<img  src="resources/cluesSolved.png">
 
 [![licensebuttons by-nc-sa](https://licensebuttons.net/l/by-nc-sa/3.0/88x31.png)](https://creativecommons.org/licenses/by-nc-sa/4.0)
