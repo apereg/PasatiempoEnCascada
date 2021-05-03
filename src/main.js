@@ -307,7 +307,7 @@ function searchClues() {
             }
             j++
         }
-        if (valid)
+        if (valid && dictionary[i].length === letters.length)
             validWords.push(dictionary[i].charAt(0) + dictionary[i].substr(1).toLowerCase())
     }
 
